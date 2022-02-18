@@ -6,18 +6,31 @@ public class Ex05 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        int valor = 10;
+        int valor = 20;
         int[] array = new int[valor];
-        int numeros = 0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < valor; i++) {
             System.out.println("Digite algo: ");
             array[i] = scan.nextInt();
 
-            numeros = array[i];
         }
 
+        printarArray(inverterArray(array));
+    }
 
+     private static int[] inverterArray(int[] arrayInicial) {
+        int[] resultado = new int[arrayInicial.length];
+        int indexResultado = 0;
+        for (int i = arrayInicial.length -1; i >= 0 ; i--) {
+            resultado[indexResultado] = arrayInicial[i];
+            indexResultado++;
+        }
+        return resultado;
+    }
 
-
+    private static void printarArray(int[] array) {
+        for (int i : array) {
+            System.out.print(i+" ");
+        }
+        System.out.println();
     }
 }

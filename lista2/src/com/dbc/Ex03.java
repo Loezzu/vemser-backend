@@ -7,59 +7,51 @@ public class Ex03 {
 
         Scanner scan = new Scanner(System.in);
 
-        String nome = "";
-        double altura = 0;
-        int idade = 0;
-        double peso = 0;
+        int contadorDeJogadores = 0;
 
-        int contador = 0;
-        int contadorAltura = 0;
+        double maiorAltura = 0;
+        double mediaAlturas = 0;
+        int maiorIdade = 0;
+        double maiorPeso = 0;
 
-        System.out.println("nome: ");
-        nome = scan.nextLine();
+        System.out.println("nome do jogador: ");
+        String nome = scan.next();
+
         while (!nome.equalsIgnoreCase("sair")) {
+            System.out.println("altura do jogador: ");
+            double altura = scan.nextDouble();
+            mediaAlturas += altura;
+            if (altura > maiorAltura) {
+                maiorAltura = altura;
+            }
 
-            System.out.println("altura: ");
-            altura = scan.nextDouble();
-            scan.nextLine();
+            System.out.println("idade do jogador: ");
+            int idade = scan.nextInt();
+            if (idade > maiorIdade) {
+                maiorIdade = idade;
+            }
 
-//            System.out.println("idade: ");
-//            idade = scan.nextInt();
-//            scan.nextLine();
-//
-//            System.out.println("peso: ");
-//            peso = scan.nextDouble();
-//            scan.nextLine();
+            System.out.println("peso do jogador: ");
+            double peso = scan.nextDouble();
+            if (peso > maiorPeso) {
+                maiorPeso = peso;
+            }
 
-            contador++;
-
-            contadorAltura++;
-
-
-
-
-
-//            System.out.println("quantidade de jogadores cadastrados: " + contador);
+            contadorDeJogadores++;
 
             System.out.println("nome: ");
-            nome = scan.nextLine();
-
-
+            nome = scan.next();
         }
 
-        int[] arrayAltura = new int[(int)altura];
+        double mediaAlturaFinal = mediaAlturas / contadorDeJogadores;
 
-        for (int i = 0; i < contadorAltura; i++){
-            System.out.println(contadorAltura);
-//                System.out.println(arrayAltura[i]);
-        }
-
+        System.out.println("Jogadores Cadastrados: " + contadorDeJogadores);
+        System.out.println("Altura do maior jogador: " + maiorAltura);
+        System.out.println("Jogador mais velho: " + maiorIdade);
+        System.out.println("Jogador mais pesado: " + maiorPeso);
+        System.out.println("Média de altura: " + mediaAlturaFinal);
 
         scan.close();
 
-//        int[] array = new int[1];
-//        for (int i = 0; i < ) {
-//
-//        }
     }
 }
