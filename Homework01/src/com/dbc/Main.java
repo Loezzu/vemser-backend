@@ -20,18 +20,41 @@ public class Main {
         Cliente c2 = new Cliente("João", "87654321", new Contato[]{contato3,contato4}, new Endereco[]{endereco3,endereco4});
         ContaCorrente conta2 = new ContaCorrente(c2, "8888888", 2222, 300.00, 200.00);
 
-//        System.out.println("Saldo Luiz: " + conta1.saldo);
-//        System.out.println("Saldo João: " + conta2.saldo);
+
+        System.out.println("====================Testando Saque==========================");
+        System.out.println("Saldo João: " + conta2.saldo);
+        conta2.sacar(100.00);
+        System.out.println("Saldo João: " + conta2.saldo);
+        System.out.println("====================Testando Saque FIM==========================\n");
+
+        System.out.println("====================Testando Deposito==========================");
+        System.out.println("Saldo Luiz: " + conta1.saldo);
+        conta1.depositar(100.00);
+        System.out.println("Saldo Luiz: " + conta1.saldo);
+        System.out.println("====================Testando Deposito FIM==========================\n");
+
+        System.out.println("====================Testando Transferencias==========================");
+        System.out.println("Saldo Luiz: " + conta1.saldo);
+        System.out.println("Saldo João: " + conta2.saldo);
         conta1.transferir(conta2, 200);
-//        System.out.println("Saldo Luiz: " + conta1.saldo);
-//        System.out.println("Saldo João: " + conta2.saldo);
+        System.out.println("Saldo Luiz: " + conta1.saldo);
+        System.out.println("Saldo João: " + conta2.saldo);
 
-        conta2.transferir(conta1, 100);
-//        System.out.println("Saldo Luiz: " + conta1.saldo);
-//        System.out.println("Saldo João: " + conta2.saldo);
+        conta2.transferir(conta1, 200);
+        System.out.println("Saldo Luiz: " + conta1.saldo);
+        System.out.println("Saldo João: " + conta2.saldo);
+        System.out.println("====================Testando Transferencias FIM==========================\n");
 
+        System.out.println("====================Testando Saldo+Cheque Especial==========================");
+        System.out.println(conta1.retornarSaldoComChequeEspecial());
+        System.out.println(conta2.retornarSaldoComChequeEspecial());
+        System.out.println("====================Testando Saldo+Cheque Especial FIM==========================\n");
+
+        System.out.println("====================Imprimindo Conta Corrente==========================");
         conta1.imprimirContaCorrente();
         conta2.imprimirContaCorrente();
+        System.out.println("====================Imprimindo Conta Corrente FIM==========================");
+
 
     }
 }

@@ -21,18 +21,24 @@ public class ContaCorrente {
     }
 
     public boolean sacar(double valor) {
+        if (valor <= 0) {
+            System.out.println("Não é possivel sacar valores negativos.");
+            return false;
+        }
         if (valor > (saldo+chequeEspecial)) {
             System.out.println("voce não pode sacar mais do que tem.");
             return false;
         }
         if (saldo >= valor) {
             saldo -= valor;
+            System.out.println("Você sacou: R$ " + valor );
             return true;
         }
         if (saldo+chequeEspecial >= valor) {
             valor -= saldo;
             saldo = 0;
             chequeEspecial -= valor;
+            System.out.println("Você sacou: R$ " + valor );
             return true;
         }
 
@@ -51,6 +57,7 @@ public class ContaCorrente {
     }
 
     public double retornarSaldoComChequeEspecial() {
+        System.out.println(cliente.nome);
         return saldo + chequeEspecial;
     }
 
@@ -71,9 +78,10 @@ public class ContaCorrente {
         }
         if (saldo+chequeEspecial >= valor) { // caso tenha que retirar do saldo e tambem do cheque especial
             cc.saldo += valor;
-            valor -= saldo;
+            double valorRetirado = valor;
+            valorRetirado -= saldo;
             saldo = 0;
-            chequeEspecial -= valor;
+            chequeEspecial -= valorRetirado;
             System.out.println("Vocẽ transferiu: R$ " + valor  + " para: " + cc.cliente.nome);
             return true;
         }
