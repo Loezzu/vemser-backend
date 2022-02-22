@@ -90,5 +90,10 @@ public class Main {
         cp1.imprimir();
         System.out.println("====================Imprimindo Conta Poupança FIM==========================\n");
 
+        System.out.println("====================Imprimindo Clientes==========================");
+        cc1.getCliente().imprimirCliente();
+        cp1.getCliente().imprimirCliente();
+        System.out.println("====================Imprimindo Clientes FIM==========================\n");
+
     }
 }
