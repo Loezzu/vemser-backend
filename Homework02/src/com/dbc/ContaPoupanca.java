@@ -16,6 +16,6 @@ public class ContaPoupanca extends Conta implements Impressao{
     }
 
     public void imprimir() {
-        System.out.println("Nome: " + getCliente().getNome() + " - Numero da conta: " + getNumeroConta() + " - NUmero da agencia: " + getAgencia() + " - Saldo: R$ " + getSaldo());
+        System.out.println("Nome: " + getCliente().getNome() + " - Numero da conta: " + getNumeroConta() + " - Numero da agencia: " + getAgencia() + " - Saldo: R$ " + getSaldo());
     }
 }

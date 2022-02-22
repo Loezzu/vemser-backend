@@ -20,7 +20,7 @@ public class ContaCorrente extends Conta implements Impressao{
     }
 
     public void imprimir() {
-        System.out.println("Nome: " + getCliente().getNome() + " - Numero da conta: " + getNumeroConta() + " - NUmero da agencia: " + getAgencia() + " - Saldo: R$ " + getSaldo() + " - Cheque especial disponivel: R$ " + chequeEspecial);
+        System.out.println("Nome: " + getCliente().getNome() + " - Numero da conta: " + getNumeroConta() + " - Numero da agencia: " + getAgencia() + " - Saldo: R$ " + getSaldo() + " - Cheque especial disponivel: R$ " + chequeEspecial);
     }
 
     public double retornarSaldoComChequeEspecial() {

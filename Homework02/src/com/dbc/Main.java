@@ -72,6 +72,27 @@ public class Main {
         conta2.imprimir();
         System.out.println("====================Imprimindo Conta Corrente FIM==========================\n");
 
+        System.out.println("====================Testando Saque na Conta Poupança==========================");
+        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
+        if (cp.sacar(400.00)) {
+            System.out.println("Funcionou");
+        }
+        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
+        System.out.println("====================Testando Saque FIM==========================\n");
+
+        System.out.println("====================Testando Transferencia Entre Conta Corrente e Conta Poupança==========================");
+        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
+        System.out.println("Saldo João: " + conta2.getSaldo());
+        if (cp.transferir(conta2, 100)) {
+            System.out.println("Funcionou");
+        }
+        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
+        System.out.println("Saldo João: " + conta2.getSaldo());
+
+        conta2.transferir(cp, 100);
+        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
+        System.out.println("Saldo João: " + conta2.getSaldo());
+        System.out.println("====================Testando Transferencia Entre Conta Corrente e Conta Poupança FIM==========================\n");
 
         System.out.println("====================Testando Creditar Taxa na Conta Poupança==========================");
         System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
@@ -82,7 +103,7 @@ public class Main {
 
         System.out.println("====================Imprimindo Conta Poupança==========================");
         cp.imprimir();
-        System.out.println("====================Imprimindo Conta Poupança FIM==========================");
+        System.out.println("====================Imprimindo Conta Poupança FIM==========================\n");
 
 
     }
