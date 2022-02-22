@@ -1,6 +1,6 @@
 package com.dbc;
 
-public class ContaPoupanca extends Conta{
+public class ContaPoupanca extends Conta implements Impressao{
     private static final double JUROS_MENSAL = 1.01;
 
     public ContaPoupanca() {
