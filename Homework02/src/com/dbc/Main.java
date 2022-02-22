@@ -14,7 +14,7 @@ public class Main {
         c1.getContato()[1] = contato2;
         c1.getEndereco()[0] = endereco1;
         c1.getEndereco()[1] = endereco2;
-        ContaCorrente conta1 = new ContaCorrente(c1, "4444444", 4444, 200.00, 400.00);
+        ContaCorrente cc1 = new ContaCorrente(c1, "4444444", 4444, 300.00, 400.00);
 
         Contato contato3 = new Contato("Celular", "000000000", 2);
         Contato contato4 = new Contato("Residencial", "513456789", 1);
@@ -26,85 +26,69 @@ public class Main {
         c2.getContato()[1] = contato4;
         c2.getEndereco()[0] = endereco3;
         c2.getEndereco()[1] = endereco4;
-        ContaCorrente conta2 = new ContaCorrente(c2, "8888888", 2222, 300.00, 200.00);
-
-        ContaPoupanca cp = new ContaPoupanca(c1, "111111", 9999, 200);
+//        ContaCorrente conta2 = new ContaCorrente(c2, "8888888", 2222, 300.00, 200.00);
+        ContaPoupanca cp1 = new ContaPoupanca(c2, "111111", 9999, 200);
 
 
         System.out.println("====================Testando Saque==========================");
-        System.out.println("Saldo João: " + conta2.getSaldo());
-        if (conta2.sacar(400.00)) {
+        System.out.println("Saldo Luiz: " + cc1.getSaldo());
+        if (cc1.sacar(400.00)) {
             System.out.println("Funcionou");
         }
-        System.out.println("Saldo João: " + conta2.getSaldo());
+        System.out.println("Saldo Luiz: " + cc1.getSaldo());
+
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
+        if (cp1.sacar(400.00)) {
+            System.out.println("Funcionou");
+        }
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
         System.out.println("====================Testando Saque FIM==========================\n");
 
         System.out.println("====================Testando Deposito==========================");
-        System.out.println("Saldo Luiz: " + conta1.getSaldo());
-        if (conta1.depositar(100)) {
+        System.out.println("Saldo Luiz: " + cc1.getSaldo());
+        if (cc1.depositar(300)) {
             System.out.println("Funcionou");
         }
-
-        System.out.println("Saldo Luiz: " + conta1.getSaldo());
+        System.out.println("Saldo Luiz: " + cc1.getSaldo());
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
+        if (cp1.depositar(200)) {
+            System.out.println("Funcionou");
+        }
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
         System.out.println("====================Testando Deposito FIM==========================\n");
 
         System.out.println("====================Testando Transferencias==========================");
-        System.out.println("Saldo Luiz: " + conta1.getSaldo());
-        System.out.println("Saldo João: " + conta2.getSaldo());
-        if (conta1.transferir(conta2, 100)) {
+        System.out.println("Saldo Luiz: " + cc1.getSaldo());
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
+        if (cc1.transferir(cp1, 100)) {
             System.out.println("Funcionou");
         }
-        System.out.println("Saldo Luiz: " + conta1.getSaldo());
-        System.out.println("Saldo João: " + conta2.getSaldo());
+        System.out.println("Saldo Luiz: " + cc1.getSaldo());
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
 
-        conta2.transferir(conta1, 200);
-        System.out.println("Saldo Luiz: " + conta1.getSaldo());
-        System.out.println("Saldo João: " + conta2.getSaldo());
+        cp1.transferir(cc1, 200);
+        System.out.println("Saldo Luiz: " + cc1.getSaldo());
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
+
         System.out.println("====================Testando Transferencias FIM==========================\n");
 
         System.out.println("====================Testando Saldo+Cheque Especial==========================");
-        System.out.println(conta1.retornarSaldoComChequeEspecial());
-        System.out.println(conta2.retornarSaldoComChequeEspecial());
+        System.out.println(cc1.retornarSaldoComChequeEspecial());
         System.out.println("====================Testando Saldo+Cheque Especial FIM==========================\n");
 
-        System.out.println("====================Imprimindo Conta Corrente==========================");
-        conta1.imprimir();
-        conta2.imprimir();
-        System.out.println("====================Imprimindo Conta Corrente FIM==========================\n");
-
-        System.out.println("====================Testando Saque na Conta Poupança==========================");
-        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
-        if (cp.sacar(400.00)) {
-            System.out.println("Funcionou");
-        }
-        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
-        System.out.println("====================Testando Saque FIM==========================\n");
-
-        System.out.println("====================Testando Transferencia Entre Conta Corrente e Conta Poupança==========================");
-        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
-        System.out.println("Saldo João: " + conta2.getSaldo());
-        if (cp.transferir(conta2, 100)) {
-            System.out.println("Funcionou");
-        }
-        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
-        System.out.println("Saldo João: " + conta2.getSaldo());
-
-        conta2.transferir(cp, 100);
-        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
-        System.out.println("Saldo João: " + conta2.getSaldo());
-        System.out.println("====================Testando Transferencia Entre Conta Corrente e Conta Poupança FIM==========================\n");
-
         System.out.println("====================Testando Creditar Taxa na Conta Poupança==========================");
-        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
-        cp.creditarTaxa();
-        System.out.println("Saldo da Conta Poupança do Luiz: " + cp.getSaldo());
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
+        cp1.creditarTaxa();
+        System.out.println("Saldo da Conta Poupança do João: " + cp1.getSaldo());
         System.out.println("====================Testando Creditar Taxa na Conta Poupança FIM==========================\n");
 
+        System.out.println("====================Imprimindo Conta Corrente==========================");
+        cc1.imprimir();
+        System.out.println("====================Imprimindo Conta Corrente FIM==========================\n");
 
         System.out.println("====================Imprimindo Conta Poupança==========================");
-        cp.imprimir();
+        cp1.imprimir();
         System.out.println("====================Imprimindo Conta Poupança FIM==========================\n");
-
 
     }
 }
