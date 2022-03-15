@@ -25,6 +25,7 @@ public class ContatoRepository {
     }
 
     public Contato create(Contato contato) throws Exception {
+        contato.setIdContato(COUNTER.incrementAndGet());
         listaContatos.add(contato);
         return contato;
     }
