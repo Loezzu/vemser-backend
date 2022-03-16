@@ -2,11 +2,9 @@ package br.com.dbc.vemser.pessoaapi.service;
 
 
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,7 +17,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,31 +62,78 @@ public class EmailService {
         emailSender.send(message);
     }
 
-    public void sendEmail(PessoaDTO pessoa) {
+
+    public void sendEmail(String email, String assunto, String mensagem) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
 
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(pessoa.getEmail());
-            mimeMessageHelper.setSubject("Olá " + pessoa.getNome());
-            mimeMessageHelper.setText(geContentFromTemplate(pessoa), true);
+            mimeMessageHelper.setTo(email);
+            mimeMessageHelper.setSubject(assunto);
+            mimeMessageHelper.setText(mensagem, true);
 
             emailSender.send(mimeMessageHelper.getMimeMessage());
-        } catch (MessagingException | IOException | TemplateException e) {
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
 
-    public String geContentFromTemplate(PessoaDTO pessoa) throws IOException, TemplateException {
+    public void sendEmailPessoa(PessoaDTO pessoa) {
+            sendEmail(pessoa.getEmail(), "Olá, " + pessoa.getNome() + "!" , getCreatePersonTemplate(pessoa));
+    }
+
+    public void sendEmailUpdatePessoa(PessoaDTO pessoa) {
+        sendEmail(pessoa.getEmail(), "Olá, " + pessoa.getNome() + "!" , getUpdatePersonTemplate(pessoa));
+    }
+
+    public void sendEmailDeletePessoa(PessoaDTO pessoa) {
+        sendEmail(pessoa.getEmail(), "Olá, " + pessoa.getNome() + "!" , getDeletePersonTemplate(pessoa));
+    }
+
+
+
+    public String getPersonTemplate(String nome, Integer id, String templateHTML) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoa.getNome());
-        dados.put("id", pessoa.getIdPessoa());
+        dados.put("nome", nome);
+        dados.put("id", id);
         dados.put("from", from);
         fmConfiguration.setDirectoryForTemplateLoading(new File("src/main/resources/templates"));
-        Template template = fmConfiguration.getTemplate("email-template.ftl");
+        Template template = fmConfiguration.getTemplate(templateHTML);
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
+
+    public String getCreatePersonTemplate(PessoaDTO pessoa) {
+        try {
+           return getPersonTemplate(pessoa.getNome(), pessoa.getIdPessoa(), "email-template.ftl");
+
+        } catch ( IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getUpdatePersonTemplate(PessoaDTO pessoa) {
+        try {
+            return getPersonTemplate(pessoa.getNome(), pessoa.getIdPessoa(), "email-template-update.ftl");
+
+        } catch ( IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getDeletePersonTemplate(PessoaDTO pessoa) {
+        try {
+            return getPersonTemplate(pessoa.getNome(), pessoa.getIdPessoa(), "email-template-delete.ftl");
+
+        } catch ( IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

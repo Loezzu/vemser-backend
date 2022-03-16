@@ -48,6 +48,7 @@ public class PessoaRepository {
     pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
     pessoaRecuperada.setNome(pessoaAtualizar.getNome());
     pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
+    pessoaRecuperada.setEmail(pessoaAtualizar.getEmail());
     return pessoaRecuperada;
   }
 

@@ -45,7 +45,7 @@ public class PessoaService {
 
       PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaCriada, PessoaDTO.class);
 
-      emailService.sendEmail(pessoaDTO);
+      emailService.sendEmailPessoa(pessoaDTO);
 
        return pessoaDTO;
     }
@@ -68,11 +68,22 @@ public class PessoaService {
 
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaAtualizada, PessoaDTO.class);
 
+        emailService.sendEmailUpdatePessoa(pessoaDTO);
+
         return pessoaDTO;
     }
 
     public void delete(Integer id) throws Exception {
         log.warn("chamando o método delete");
+
+        pessoaRepository.list().stream()
+                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
+                .findFirst()
+                .map(pessoa -> objectMapper.convertValue(pessoa, PessoaDTO.class)).ifPresent(pessoaDTO -> {
+                    emailService.sendEmailDeletePessoa(pessoaDTO);
+                }
+        );
+
         pessoaRepository.delete(id);
     }
 
