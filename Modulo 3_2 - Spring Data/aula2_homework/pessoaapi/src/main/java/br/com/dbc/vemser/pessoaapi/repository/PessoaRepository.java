@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
     List<PessoaEntity> findByNomeContainingIgnoreCase(String nome);
-    List<PessoaEntity> findByCpfContains(String cpf);
+    List<PessoaEntity> findByCpf(String cpf);
     List<PessoaEntity> findByDataNascimentoBetween(LocalDate dataNascimentoInicial, LocalDate dataNascimentoFinal);
 
 

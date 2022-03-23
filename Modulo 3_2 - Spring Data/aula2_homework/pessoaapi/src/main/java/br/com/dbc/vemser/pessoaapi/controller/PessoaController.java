@@ -92,7 +92,7 @@ public class PessoaController {
 
     @GetMapping("/bycpf")
     public List<PessoaEntity> listByCpf(@RequestParam("cpf") String cpf) {
-        return pessoaRepository.findByCpfContains(cpf);
+        return pessoaRepository.findByCpf(cpf);
     }
 
 
