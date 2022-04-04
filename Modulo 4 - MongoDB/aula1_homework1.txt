@@ -1,0 +1,175 @@
+{
+    "tindev_user": [
+        {
+            "user_id" : 2,
+            "username" : "joao",
+            "password" : "$2a$10$1Fs.W7gnwQz1lPH48jU4yOeo3PetD41aNlt.q3ubpMSlpi.qBScV6",
+            "personinfo_id" : 2,
+            "address_id" : 2,
+            "proglangs" : "JAVA",
+            "gender" : "MALE",
+            "pref" : "WOMEN",
+            "role" : 1
+        }
+    ]
+}
+
+    
+-- Criar DB
+
+criar tindev
+use tindev
+db.createCollection("tindev_user")
+
+
+
+db.tindev_user.insert(
+    {
+        "username": "joao",
+        "password": "$2a$10$1Fs.W7gnwQz1lPH48jU4yOeo3PetD41aNlt.q3ubpMSlpi.qBScV6",
+        "progLangs": "JAVA",
+        "gender": "MALE",
+        "pref": "WOMEN",
+        "addressDTO": {
+          "street": "Rua amapa",
+          "number": 12,
+          "city": "Cachoeirinha",
+          "cep": "94920-100",
+          "idAddress": 2
+        },
+        "personInfoDTO": {
+          "realName": "João Silva",
+          "age": 25,
+          "email": "joaozinho@mail.com",
+          "idPersonInfo": 2
+        }
+    }
+)
+
+db.tindev_user.insert(
+    {
+        "username": "maria",
+        "password": "$2a$10$S7cFpI0nBuf/67t6Jfut.eT26i2dmyvnAVYslLIpfmy3Mdx9ID23S",
+        "progLangs": "JAVA",
+        "gender": "FEMALE",
+        "pref": "BOTH",
+        "userId": 3,
+        "addressDTO": {
+            "street": "Rua amapa",
+            "number": 12,
+            "city": "Cachoeirinha",
+            "cep": "94920-100",
+            "idAddress": 3
+        },
+        "personInfoDTO": {
+            "realName": "Maria Silva",
+            "age": 25,
+            "email": "mariazinha@mail.com",
+            "idPersonInfo": 3
+        }
+    }
+)
+
+
+
+- FIND com navegação no documento
+
+db.tindev_user.find()
+
+-- Buscar
+
+- FIND com navegação no documento
+
+db.tindev_user.find().pretty()
+
+db.tindev_user.find(
+{ 
+  "username" : "joao"
+}
+).pretty()
+
+
+-- FIND com OR e IN
+
+db.tindev_user.find({
+    "personInfoDTO.realName" : "João Silva",
+    "personInfoDTO.realName" : "Maria Silva"
+})
+
+
+db.tindev_user.find({
+    $or : [
+        {"personInfoDTO.realName" : "João Silva"},
+        {"personInfoDTO.realName" : "Maria Silva"}    
+    ]
+})
+
+db.tindev_user.find({
+     $or : [
+        {"personInfoDTO.realName" : "João Silva"},
+        {"personInfoDTO.realName" : "Maria Silva"},
+    ],
+    "username" : "joao"
+ })
+
+ db.tindev_user.find({
+    "personInfoDTO.realName" : {
+        $in : ["Maria Silva", "João Silva"]
+        }
+})
+
+db.tindev_user.find({ "progLangs" : "JAVA" })
+
+
+---- DELETE -----
+
+db.tindev_user.deleteOne({
+  "username" : "joao"
+})
+
+
+-------- INSERT MANY -----
+
+db.tindev_user.insertMany([
+    {
+        "username": "joao",
+        "password": "$2a$10$1Fs.W7gnwQz1lPH48jU4yOeo3PetD41aNlt.q3ubpMSlpi.qBScV6",
+        "progLangs": "JAVA",
+        "gender": "MALE",
+        "pref": "WOMEN",
+        "addressDTO": {
+          "street": "Rua amapa",
+          "number": 12,
+          "city": "Cachoeirinha",
+          "cep": "94920-100",
+          "idAddress": 2
+        },
+        "personInfoDTO": {
+          "realName": "João Silva",
+          "age": 25,
+          "email": "joaozinho@mail.com",
+          "idPersonInfo": 2
+        }
+    },
+    {
+        "username": "maria",
+        "password": "$2a$10$S7cFpI0nBuf/67t6Jfut.eT26i2dmyvnAVYslLIpfmy3Mdx9ID23S",
+        "progLangs": "JAVA",
+        "gender": "FEMALE",
+        "pref": "BOTH",
+        "userId": 3,
+        "addressDTO": {
+            "street": "Rua amapa",
+            "number": 12,
+            "city": "Cachoeirinha",
+            "cep": "94920-100",
+            "idAddress": 3
+        },
+        "personInfoDTO": {
+            "realName": "Maria Silva",
+            "age": 25,
+            "email": "mariazinha@mail.com",
+            "idPersonInfo": 3
+        }
+    }
+])
