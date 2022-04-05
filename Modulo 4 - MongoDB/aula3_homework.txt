@@ -1,0 +1,142 @@
+
+-- Criar DB
+
+criar aula3
+use aula3
+db.createCollection("tindev_user")
+
+
+-------- INSERT MANY -----
+
+db.tindev_user.insertMany([
+    {
+        "username": "joao",
+        "password": "$2a$10$1Fs.W7gnwQz1lPH48jU4yOeo3PetD41aNlt.q3ubpMSlpi.qBScV6",
+        "progLangs": "JAVA",
+        "gender": "MALE",
+        "pref": "WOMEN",
+        "addressDTO": {
+          "street": "Rua amapa",
+          "number": 12,
+          "city": "Cachoeirinha",
+          "cep": "94920-100",
+          "idAddress": 2
+        },
+        "personInfoDTO": {
+          "realName": "João Silva",
+           age: 25,
+          "email": "joaozinho@mail.com",
+          "idPersonInfo": 2
+        }
+    },
+    {
+        "username": "maria",
+        "password": "$2a$10$S7cFpI0nBuf/67t6Jfut.eT26i2dmyvnAVYslLIpfmy3Mdx9ID23S",
+        "progLangs": "JAVA",
+        "gender": "FEMALE",
+        "pref": "BOTH",
+        "userId": 3,
+        "addressDTO": {
+            "street": "Rua amapa",
+            "number": 12,
+            "city": "Cachoeirinha",
+            "cep": "94920-100",
+            "idAddress": 3
+        },
+        "personInfoDTO": {
+            "realName": "Maria Silva",
+            age: 25,
+            "email": "mariazinha@mail.com",
+            "idPersonInfo": 3
+        }
+    },
+    {
+    "username": "greg",
+    "password": "$2a$10$JB0wvzBOGG9N8RUh8pWwCehv6g2BE2mxvKIro8n3EMCvEmp1fKKP.",
+    "progLangs": "JAVA",
+    "gender": "MALE",
+    "pref": "WOMEN",
+    "userId": 7,
+    "addressDTO": {
+      "street": "Rua Valmor Machado Lemos",
+      "number": 195,
+      "city": "Gravataí",
+      "cep": "94920-100",
+      "idAddress": 7
+    },
+    "personInfoDTO": {
+      "realName": "Grégori Nunes",
+       age: 20,
+      "email": "greg@mail.com",
+      "idPersonInfo": 7
+    },
+    "addressId": 7,
+    "persoInfoId": 7
+  },
+  {
+    "username": "guzz",
+    "password": "$2a$10$UZrIptIshPh9eoHWjYw6luejrT120bMC7OisfM1vPBHNRczJNhixO",
+    "progLangs": "RUBY",
+    "gender": "MALE",
+    "pref": "BOTH",
+    "userId": 8,
+    "addressDTO": {
+      "street": "Avenida São Paulo",
+      "number": 556,
+      "city": "Gravataí",
+      "cep": "94920-100",
+      "idAddress": 8
+    },
+    "personInfoDTO": {
+      "realName": "Gustavo Teichmann",
+       age: 19,
+      "email": "guzz@mail.com",
+      "idPersonInfo": 8
+    },
+    "addressId": 8,
+    "persoInfoId": 8
+  }
+])
+
+
+
+
+
+
+---- Find Ordenado
+
+db.tindev_user.find({
+    progLangs: "JAVA"
+}).sort("username")
+
+
+
+// Na ordem exata
+
+db.tindev_user.find( { 
+  "addressDTO.street": "Rua amapa"
+})
+
+db.tindev_user.find( { "personInfoDTO.age": { $gt: 19 } } )
+
+// Condição múltipla
+db.tindev_user.find( { "personInfoDTO.age": { $gt: 15, $lt: 25 } } )
+
+
+---- Projections
+
+db.tindev_user.find( {}, { _id: 0, username: 1, "personInfoDTO.email": 1 } )
+
+
+
+// Limpar a collection
+db.tindev_user.deleteMany({ })
+
+
+---- Aggregate
+
+
+db.tindev_user.aggregate( [
+   { $match: { progLangs: "JAVA" } },
+   { $group: { _id: "$progLangs", age: { $sum: "$personInfoDTO.age" } } }
+] )

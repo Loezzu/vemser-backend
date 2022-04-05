@@ -1,0 +1,101 @@
+
+-- Criar DB
+
+criar aula2
+use aula2
+db.createCollection("tindev_user")
+
+
+-------- INSERT MANY -----
+
+db.tindev_user.insertMany([
+    {
+        "username": "joao",
+        "password": "$2a$10$1Fs.W7gnwQz1lPH48jU4yOeo3PetD41aNlt.q3ubpMSlpi.qBScV6",
+        "progLangs": "JAVA",
+        "gender": "MALE",
+        "pref": "WOMEN",
+        "addressDTO": {
+          "street": "Rua amapa",
+          "number": 12,
+          "city": "Cachoeirinha",
+          "cep": "94920-100",
+          "idAddress": 2
+        },
+        "personInfoDTO": {
+          "realName": "João Silva",
+          "age": 25,
+          "email": "joaozinho@mail.com",
+          "idPersonInfo": 2
+        }
+    },
+    {
+        "username": "maria",
+        "password": "$2a$10$S7cFpI0nBuf/67t6Jfut.eT26i2dmyvnAVYslLIpfmy3Mdx9ID23S",
+        "progLangs": "JAVA",
+        "gender": "FEMALE",
+        "pref": "BOTH",
+        "userId": 3,
+        "addressDTO": {
+            "street": "Rua amapa",
+            "number": 12,
+            "city": "Cachoeirinha",
+            "cep": "94920-100",
+            "idAddress": 3
+        },
+        "personInfoDTO": {
+            "realName": "Maria Silva",
+            "age": 25,
+            "email": "mariazinha@mail.com",
+            "idPersonInfo": 3
+        }
+    }
+])
+
+
+---- Find Equal
+{ <field1>: <value1>, ... }
+{ status: "D" }
+
+// Ex
+SELECT * FROM alunos WHERE status = "D"
+
+db.tindev_user.find({
+    "progLangs": "JAVA"
+})
+
+
+---- Find AND
+{ status: "A", idade: { $lt: 25 } }
+
+SELECT * FROM alunos WHERE status = "A" AND idade < 25
+
+db.tindev_user.find({
+    "personInfoDTO.realName": "Maria Silva", 
+    "personInfoDTO.age": { $lt: 30 }
+})
+
+
+---- Find Expressão
+{ nome: /^Ra/ } 
+
+SELECT * FROM alunos WHERE nome LIKE "Ra%")
+
+db.tindev_user.find({
+    "username": /^jo/ 
+})
+
+
+---- Update
+{
+  <update operator>: { <field1>: <value1>, ... },
+  <update operator>: { <field2>: <value2>, ... },
+  ...
+}
+
+db.tindev_user.updateOne(
+   { username: "joao" },
+   {
+     $set: { "nome": "joao", progLangs: "PHP" }           
+   }
+)
