@@ -110,6 +110,11 @@ db.tindev_user.find({
 }).sort("username")
 
 
+db.tindev_user.find({
+    progLangs: "JAVA"
+}).sort("username").limit(2)
+
+
 
 // Na ordem exata
 
