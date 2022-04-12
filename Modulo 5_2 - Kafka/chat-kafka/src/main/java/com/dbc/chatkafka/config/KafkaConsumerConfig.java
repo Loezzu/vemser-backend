@@ -1,4 +1,4 @@
-package com.dbc.veiculoprodutorconsumidor.config;
+package com.dbc.chatkafka.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
