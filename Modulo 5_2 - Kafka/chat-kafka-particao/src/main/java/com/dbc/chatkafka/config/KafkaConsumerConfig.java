@@ -34,8 +34,17 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.CLIENT_ID_CONFIG, clientId);
-        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 10);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, EARLIEST);
+        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 1);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, LATEST);
+        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 1000);
+        props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG, 300000);
+        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 1000);
+        props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 900000);
+        props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 600000);
+
+
+
+
 
         DefaultKafkaConsumerFactory<Object, Object> kafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(props);
 
